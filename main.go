@@ -16,7 +16,7 @@ func main() {
 	_ = tray
 	b, err := gtk.BuilderNew()
 	if err != nil {
-		log.Fatal("Ошибка:", err)
+		log.Fatal("Error:", err)
 	}
 	go gtkLoop()
 
