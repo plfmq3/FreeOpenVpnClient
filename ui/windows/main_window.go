@@ -1,8 +1,6 @@
 package windows
 
 import (
-	"fmt"
-
 	"github.com/gotk3/gotk3/glib"
 	"github.com/gotk3/gotk3/gtk"
 	"github.com/plfmq3/FreeOpenVpnClient/config"
