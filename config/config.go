@@ -19,7 +19,7 @@ func GetConfig() *Config {
 		selectors.LoaderContainer = "loaderContainer"
 		selectors.LoaderText = "loaderText"
 		selectors.SettingsButton = "settingsButton"
-		selectors.VpnList = "vpnServerList"
+		selectors.VpnList = "vpnServersList"
 		selectors.ConnectButton = "connectButton"
 
 		selectors.SettingsWindow = "settings"

@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/gotk3/gotk3/gtk"
+	"github.com/plfmq3/FreeOpenVpnClient/config"
 	"github.com/plfmq3/FreeOpenVpnClient/ui"
 	//"github.com/godbus/dbus/v5"
 )
@@ -15,18 +16,39 @@ func main() {
 	tray := ui.NewTray()
 	_ = tray
 	b, err := gtk.BuilderNew()
-	if err != nil {
-		log.Fatal("Error:", err)
-	}
+	checkFatal(err)
+
 	go gtkLoop()
 
 	windowManager, e := ui.NewWindowManager(b)
-	if e != nil {
-		log.Fatal(e)
-	}
-	_ = windowManager
+	checkFatal(e)
 
-	windowManager.InitWindows()
+	cfg := config.GetConfig()
+
+	e = windowManager.CreateWindows(cfg.MainWindow, cfg.SettingsWindow, cfg.CaptchaWindow)
+
+	checkFatal(e)
+	mainWindow, e := windowManager.GetWindow(cfg.MainWindow)
+	checkFatal(e)
+
+	e = mainWindow.CreateSubitems(cfg.LoaderContainer, cfg.LoaderText,
+		cfg.SettingsButton, cfg.ConnectButton, cfg.VpnList)
+	checkFatal(e)
+
+	settingsWindow, _ := windowManager.GetWindow(cfg.SettingsWindow)
+
+	e = settingsWindow.CreateSubitems(cfg.SolverSwitch, cfg.SolverUrl,
+		cfg.TcpButton, cfg.UdpButton, cfg.SaveSettingsButton)
+	checkFatal(e)
+
+	captchaWindow, _ := windowManager.GetWindow(cfg.CaptchaWindow)
+
+	e = captchaWindow.CreateSubitems(cfg.LoaderContainer, cfg.LoaderText,
+		cfg.SettingsButton, cfg.ConnectButton)
+	checkFatal(e)
+
+	e = windowManager.InitAllWindows()
+	checkFatal(e)
 
 	exitChan, showMainWinChan := tray.GetChannels()
 
@@ -36,7 +58,7 @@ func main() {
 			fmt.Println("exit")
 			return
 		case <-*showMainWinChan:
-			windowManager.GetWindows().MainWindow.Show()
+			mainWindow.Show()
 		}
 	}
 
@@ -69,4 +91,12 @@ func main() {
 
 func gtkLoop() {
 	gtk.Main()
+}
+
+func checkFatal(e error) {
+	if e != nil {
+		fmt.Println(e)
+		log.Fatal(e)
+
+	}
 }

@@ -3,6 +3,7 @@ package ui
 import (
 	"fmt"
 	"io/ioutil"
+	"time"
 
 	"github.com/getlantern/systray"
 	"github.com/plfmq3/FreeOpenVpnClient/config"
@@ -16,6 +17,7 @@ type Tray struct {
 func NewTray() *Tray {
 	t := new(Tray)
 	go systray.Run(t.onReady, t.onExit)
+	time.Sleep(time.Millisecond * 500) //ugly fix, should remove it
 	return t
 }
 
