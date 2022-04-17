@@ -43,7 +43,7 @@ func (wm *WindowManager) InitAllWindows() error {
 		return err
 	}
 	for _, item := range wm.windows {
-		err := InitUiLogic(&item)
+		err := InitUiLogic(item)
 		if err != nil {
 			return err
 		}

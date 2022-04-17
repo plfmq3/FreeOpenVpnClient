@@ -6,6 +6,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">8</property>
     <property name="resizable">False</property>
+    <property name="window_position">center-always</property>
     <property name="default_width">440</property>
     <property name="default_height">200</property>
     <child type="titlebar">
@@ -109,6 +110,7 @@
   <object class="GtkWindow" id="mainWindow">
     <property name="can_focus">False</property>
     <property name="border_width">8</property>
+    <property name="window_position">center-always</property>
     <property name="default_width">440</property>
     <property name="default_height">440</property>
     <child type="titlebar">
@@ -241,6 +243,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">8</property>
     <property name="resizable">False</property>
+    <property name="window_position">center-always</property>
     <property name="default_width">440</property>
     <property name="default_height">250</property>
     <child type="titlebar">
@@ -258,6 +261,9 @@
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="label" translatable="yes">Settings</property>
+            <attributes>
+              <attribute name="foreground" value="#eeeeeeeeecec"/>
+            </attributes>
           </object>
           <packing>
             <property name="expand">False</property>

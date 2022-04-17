@@ -13,6 +13,8 @@ import (
 func main() {
 	gtk.Init(nil)
 
+	//w := web.NewWeb()
+	//w.PullData()
 	tray := ui.NewTray()
 	_ = tray
 	b, err := gtk.BuilderNew()
@@ -97,6 +99,5 @@ func checkFatal(e error) {
 	if e != nil {
 		fmt.Println(e)
 		log.Fatal(e)
-
 	}
 }

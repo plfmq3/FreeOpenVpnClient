@@ -11,7 +11,7 @@ import (
 type Window struct {
 	window   *gtk.Window
 	builder  *gtk.Builder
-	id       *string
+	id       string
 	subitems map[string]glib.IObject
 }
 
@@ -20,7 +20,7 @@ func NewWindow(b *gtk.Builder, windowId string) (*Window, error) {
 	w.builder = b
 	w.subitems = make(map[string]glib.IObject)
 	obj, err := b.GetObject(windowId)
-	w.id = &windowId
+	w.id = windowId
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func (w *Window) Hide() {
 	})
 }
 
-func (w *Window) GetId() *string {
+func (w *Window) GetId() string {
 	return w.id
 }
 
